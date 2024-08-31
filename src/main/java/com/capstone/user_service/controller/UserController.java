@@ -1,6 +1,6 @@
 package com.capstone.user_service.controller;
 
-import com.capstone.user_service.model.User;
+import com.capstone.user_service.model.*;
 import com.capstone.user_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,22 +15,47 @@ public class UserController {
 
     private final UserService userService;
 
-    //for gateway testing
-    @GetMapping("/test")
-    public String test(){
-        return "user service up and running";
-    }
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
+
+    //for gateway testing
+    @GetMapping("/test")
+    public String test(){
+        return "user service up and running";
+    }
+
     // CREATE
-    @PostMapping
+    @PostMapping("/signup")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User createdUser = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    }
+
+    // VALIDATE JWT
+    @PostMapping("/validate")
+    public ResponseEntity<?> validateToken(@RequestBody JWT jwt) {
+        String username = userService.validateToken(jwt.getToken());
+        if(username!=null)
+            return ResponseEntity.ok(new ValidationResponse(username));
+        else
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Token is invalid");
+    }
+
+    // LOGIN
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody AuthenticationRequest request) {
+        LoginResponse response = userService.loginUser(request.getUsername(), request.getPassword());
+        if (response != null&&response.getToken()!=null) {
+            return ResponseEntity.ok(response);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
+
     }
 
     // READ
