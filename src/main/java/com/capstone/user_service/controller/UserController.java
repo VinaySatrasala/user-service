@@ -16,7 +16,7 @@ public class UserController {
     private final UserService userService;
 
     //for gateway testing
-    @GetMapping
+    @GetMapping("/test")
     public String test(){
         return "user service up and running";
     }
