@@ -21,7 +21,6 @@ import com.capstone.user_service.model.ValidationResponse;
 import com.capstone.user_service.service.UserService;
 
 @RestController
-@CrossOrigin({"http://localhost:4200"})
 @RequestMapping("/api/v1/users")
 public class UserController {
 
