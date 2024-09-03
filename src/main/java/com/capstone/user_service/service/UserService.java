@@ -74,7 +74,6 @@ public class UserService {
         System.out.println(user);
         existingUser.setUsername(user.getUsername());
         existingUser.setEmail(user.getEmail());
-        existingUser.setState(user.getState());
         existingUser.setCountry(user.getCountry());
         System.out.println(existingUser);
         return userRepository.save(existingUser);
