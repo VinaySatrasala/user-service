@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class LoginResponse {
     String token;
     String userID;
+    String country;
 }

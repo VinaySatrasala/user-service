@@ -54,7 +54,7 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("User not found with username: " + username));
 
         if (passwordEncoder.matches(password, user.getPassword())) {
-            return new LoginResponse(jwtUtil.generateToken(user),user.getId());
+            return new LoginResponse(jwtUtil.generateToken(user),user.getId(),user.getCountry());
 
         } else {
             throw new UserNotFoundException("Invalid password");
