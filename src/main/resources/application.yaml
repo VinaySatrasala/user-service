@@ -3,7 +3,7 @@ spring:
    name: user-service
   data:
    mongodb:
-    uri: mongodb+srv://shahad7:qahe7LhbAc84JQfs@cluster0.ytovchg.mongodb.net/capstone?retryWrites=true&w=majority&appName=Cluster0
+    uri: mongodb+srv://shahad7:3x3YoARREg17y2S2@cluster0.ytovchg.mongodb.net/capstone?retryWrites=true&w=majority&appName=Cluster0
    
 server:
  port: 5001
